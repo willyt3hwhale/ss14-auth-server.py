@@ -35,7 +35,8 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length).decode('utf-8')
 
-        if "/%20api/auth/authenticate" not in self.requestline:
+        if "/%20api/auth/authenticate" not in self.requestline and \
+            "/api/auth/authenticate" not in self.requestline:
             return 
         
         username = json.loads(body)['username']
